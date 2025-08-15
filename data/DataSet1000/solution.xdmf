@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<!DOCTYPE Xdmf SYSTEM "Xdmf.dtd" []>
+<Xdmf Version="3.0" xmlns:xi="http://www.w3.org/2001/XInclude">
+  <Domain>
+    <Grid Name="Grid" GridType="Uniform">
+      <Topology TopologyType="Tetrahedron" NumberOfElements="43399" NodesPerElement="4">
+        <DataItem Dimensions="43399 4" NumberType="Int" Format="HDF">solution.h5:/Mesh/Grid/topology</DataItem>
+      </Topology>
+      <Geometry GeometryType="XYZ">
+        <DataItem Dimensions="10502 3" Format="HDF">solution.h5:/Mesh/Grid/geometry</DataItem>
+      </Geometry>
+    </Grid>
+    <Grid Name="u" GridType="Collection" CollectionType="Temporal">
+      <Grid Name="u" GridType="Uniform">
+        <xi:include xpointer="xpointer(/Xdmf/Domain/Grid[@GridType='Uniform'][1]/*[self::Topology or self::Geometry])" />
+        <Time Value="0" />
+        <Attribute Name="u" AttributeType="Vector" Center="Node">
+          <DataItem Dimensions="10502 3" Format="HDF">solution.h5:/Function/u/0</DataItem>
+        </Attribute>
+      </Grid>
+    </Grid>
+    <Grid Name="random_prop" GridType="Collection" CollectionType="Temporal">
+      <Grid Name="random_prop" GridType="Uniform">
+        <xi:include xpointer="xpointer(/Xdmf/Domain/Grid[@GridType='Uniform'][1]/*[self::Topology or self::Geometry])" />
+        <Time Value="0" />
+        <Attribute Name="random_prop" AttributeType="Scalar" Center="Node">
+          <DataItem Dimensions="10502 1" Format="HDF">solution.h5:/Function/random_prop/0</DataItem>
+        </Attribute>
+      </Grid>
+    </Grid>
+    <Grid Name="eps" GridType="Collection" CollectionType="Temporal">
+      <Grid Name="eps" GridType="Uniform">
+        <xi:include xpointer="xpointer(/Xdmf/Domain/Grid[@GridType='Uniform'][1]/*[self::Topology or self::Geometry])" />
+        <Time Value="0" />
+        <Attribute Name="eps" AttributeType="Tensor" Center="Cell">
+          <DataItem Dimensions="43399 9" Format="HDF">solution.h5:/Function/eps/0</DataItem>
+        </Attribute>
+      </Grid>
+    </Grid>
+    <Grid Name="sigma" GridType="Collection" CollectionType="Temporal">
+      <Grid Name="sigma" GridType="Uniform">
+        <xi:include xpointer="xpointer(/Xdmf/Domain/Grid[@GridType='Uniform'][1]/*[self::Topology or self::Geometry])" />
+        <Time Value="0" />
+        <Attribute Name="sigma" AttributeType="Tensor" Center="Cell">
+          <DataItem Dimensions="43399 9" Format="HDF">solution.h5:/Function/sigma/0</DataItem>
+        </Attribute>
+      </Grid>
+    </Grid>
+    <Grid Name="sigma_vm" GridType="Collection" CollectionType="Temporal">
+      <Grid Name="sigma_vm" GridType="Uniform">
+        <xi:include xpointer="xpointer(/Xdmf/Domain/Grid[@GridType='Uniform'][1]/*[self::Topology or self::Geometry])" />
+        <Time Value="0" />
+        <Attribute Name="sigma_vm" AttributeType="Scalar" Center="Cell">
+          <DataItem Dimensions="43399 1" Format="HDF">solution.h5:/Function/sigma_vm/0</DataItem>
+        </Attribute>
+      </Grid>
+    </Grid>
+  </Domain>
+</Xdmf>
